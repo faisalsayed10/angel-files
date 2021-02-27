@@ -1,6 +1,4 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import { ROOT_FOLDER } from "../../hooks/useFolder";
@@ -16,7 +14,6 @@ function FolderBreadCrumbs({ currentFolder }) {
       fontWeight="medium"
       whiteSpace="nowrap"
       isTruncated={true}
-      separator={<FontAwesomeIcon icon={faChevronRight} />}
       width="100%"
       px={["2", "6", "8"]}
       pt="4"

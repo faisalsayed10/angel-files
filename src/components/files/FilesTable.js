@@ -4,7 +4,7 @@ import File from "./File";
 
 function FilesTable({ childFiles }) {
   return (
-    <Box borderWidth="3px" borderRadius="xl">
+    <Box borderWidth="3px" borderRadius="xl" overflowX="auto">
       <Table w="full">
         <thead>
           <Tr>

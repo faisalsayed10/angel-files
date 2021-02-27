@@ -100,6 +100,7 @@ function Dashboard() {
         {/* BREADCRUMBS */}
 
         <FolderBreadCrumbs currentFolder={folder} />
+        <hr style={{ marginBottom: "2rem" }} />
 
         {/* FOLDERS */}
 
@@ -161,7 +162,7 @@ function Dashboard() {
             width="80vw"
           >
             {uploadingFiles.map((file) => (
-              <Box key={file.id} my='4'>
+              <Box key={file.id} my="4">
                 <Text fontSize="md">
                   {file.error
                     ? "Upload Failed!"

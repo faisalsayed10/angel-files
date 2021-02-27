@@ -21,7 +21,6 @@ function AddFileButton({
 
   const handleUpload = (e) => {
     const file = e.target.files[0];
-    console.log(file);
 
     if (currentFolder == null || file == null) return;
 
@@ -104,9 +103,17 @@ function AddFileButton({
                   folderId: currentFolder.id,
                   userId: currentUser.uid,
                   size: file.size,
+                  filePath: `/files/${currentUser.uid}/${filePath}`
                 });
               }
             });
+        });
+        toast({
+          title: "Success",
+          description: "File uploaded successfully!",
+          status: "success",
+          duration: 1000,
+          isClosable: true,
         });
       }
     );
