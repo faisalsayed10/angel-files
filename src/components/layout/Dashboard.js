@@ -19,15 +19,17 @@ import AddFileButton from "../Buttons/AddFileButton";
 import AddFolderButton from "../Buttons/AddFolderButton";
 import HomeButton from "../Buttons/HomeButton";
 import ProfileButton from "../Buttons/ProfileButton";
-import File from "../files/File";
+import FilesEmptyState from "../FilesEmptyState";
 import Folder from "../files/Folder";
 import FolderBreadCrumbs from "../files/FolderBreadCrumbs";
+import FilesTable from "../FilesTable";
 import Navbar from "./Navbar";
+import FilesTableSkeleton from "../FilesTableSkeleton";
 
 function Dashboard() {
   const { folderId } = useParams();
   const { state = {} } = useLocation();
-  const { folder, childFolders, childFiles } = useFolder(
+  const { folder, childFolders, childFiles, loading } = useFolder(
     folderId,
     state.folder
   );
@@ -99,7 +101,7 @@ function Dashboard() {
 
         <FolderBreadCrumbs currentFolder={folder} />
 
-        {/* FILES AND FOLDERS */}
+        {/* FOLDERS */}
 
         <Box>
           {childFolders.length > 0 && (
@@ -111,15 +113,36 @@ function Dashboard() {
               ))}
             </Box>
           )}
-          {childFolders.length > 0 && childFiles.length > 0 && <hr />}
+
+          <hr style={{ marginTop: "2rem", marginBottom: "2rem" }} />
+
+          {/* FILES */}
+
+          {loading && (
+            <>
+              <Text fontSize="3xl" fontWeight="600" mb={4}>
+                Your Files
+              </Text>
+              <FilesTableSkeleton />
+            </>
+          )}
+
+          {!loading && childFiles.length === 0 && (
+            <>
+              <Text fontSize="3xl" fontWeight="600" mb={4}>
+                Your Files
+              </Text>
+              <FilesEmptyState />
+            </>
+          )}
+
           {childFiles.length > 0 && (
-            <Box as="div" display="flex" flexWrap="wrap">
-              {childFiles.map((childFile) => (
-                <Box as="div" key={childFile.id} w="200px" p="2">
-                  <File file={childFile} />
-                </Box>
-              ))}
-            </Box>
+            <>
+              <Text fontSize="3xl" fontWeight="600" mb={4}>
+                Your Files
+              </Text>
+              <FilesTable childFiles={childFiles} />
+            </>
           )}
         </Box>
       </Box>

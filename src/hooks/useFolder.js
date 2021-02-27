@@ -7,6 +7,8 @@ const ACTIONS = {
   UPDATE_FOLDER: "update-folder",
   SET_CHILD_FOLDERS: "set-child-folders",
   SET_CHILD_FILES: "set-child-files",
+  SET_LOADING: "set-loading",
+  STOP_LOADING: "stop-loading",
 };
 
 export const ROOT_FOLDER = { name: "Root", id: null, path: [] };
@@ -35,6 +37,16 @@ const reducer = (state, action) => {
         ...state,
         childFiles: action.payload.childFiles,
       };
+    case ACTIONS.SET_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ACTIONS.STOP_LOADING:
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }
@@ -47,6 +59,7 @@ export function useFolder(folderId = null, folder = null) {
     folder,
     childFolders: [],
     childFiles: [],
+    loading: false,
   });
 
   useEffect(() => {
@@ -82,16 +95,17 @@ export function useFolder(folderId = null, folder = null) {
     return database.folders
       .where("parentId", "==", folderId)
       .where("userId", "==", currentUser.uid)
-      .orderBy('createdAt')
-      .onSnapshot(snapshot => {
+      .orderBy("createdAt")
+      .onSnapshot((snapshot) => {
         dispatch({
           type: ACTIONS.SET_CHILD_FOLDERS,
-          payload: { childFolders: snapshot.docs.map(database.formatDoc) }
-        })
-      })
+          payload: { childFolders: snapshot.docs.map(database.formatDoc) },
+        });
+      });
   }, [folderId, currentUser]);
 
   useEffect(() => {
+    dispatch({ type: ACTIONS.SET_LOADING });
     return database.files
       .where("folderId", "==", folderId)
       .where("userId", "==", currentUser.uid)
@@ -101,6 +115,7 @@ export function useFolder(folderId = null, folder = null) {
           type: ACTIONS.SET_CHILD_FILES,
           payload: { childFiles: snapshot.docs.map(database.formatDoc) },
         });
+        dispatch({ type: ACTIONS.STOP_LOADING });
       });
   }, [folderId, currentUser]);
 
