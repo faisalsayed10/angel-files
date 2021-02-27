@@ -19,12 +19,12 @@ import AddFileButton from "../Buttons/AddFileButton";
 import AddFolderButton from "../Buttons/AddFolderButton";
 import HomeButton from "../Buttons/HomeButton";
 import ProfileButton from "../Buttons/ProfileButton";
-import FilesEmptyState from "../FilesEmptyState";
-import Folder from "../files/Folder";
-import FolderBreadCrumbs from "../files/FolderBreadCrumbs";
-import FilesTable from "../FilesTable";
+import FilesEmptyState from "../files/FilesEmptyState";
+import Folder from "../../folders/Folder";
+import FolderBreadCrumbs from "./FolderBreadCrumbs";
+import FilesTable from "../files/FilesTable";
 import Navbar from "./Navbar";
-import FilesTableSkeleton from "../FilesTableSkeleton";
+import FilesTableSkeleton from "../files/FilesTableSkeleton";
 
 function Dashboard() {
   const { folderId } = useParams();
@@ -155,13 +155,13 @@ function Dashboard() {
             borderWidth="2px"
             borderRadius="md"
             px="4"
-            py="8"
             pos="absolute"
+            bgColor="#3182ce"
             bottom="5%"
             width="80vw"
           >
             {uploadingFiles.map((file) => (
-              <Box key={file.id}>
+              <Box key={file.id} my='4'>
                 <Text fontSize="md">
                   {file.error
                     ? "Upload Failed!"

@@ -1,6 +1,6 @@
 import { Box, Table, Th, Tr } from "@chakra-ui/react";
 import React from "react";
-import File from "./files/File";
+import File from "./File";
 
 function FilesTable({ childFiles }) {
   return (
