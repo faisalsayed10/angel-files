@@ -1,0 +1,34 @@
+import { Text, Image, Box, useColorMode, Button } from "@chakra-ui/react";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import logo from "../../images/logo_48x48.png";
+
+export default function Navbar() {
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  return (
+    <Box display="flex" alignItems="baseline" justifyContent="center">
+      <Image
+        width={["56px", "72px"]}
+        fallbackSrc={logo}
+        src={logo}
+        alt="Angelfiles Logo"
+        display="inline"
+        mr="2"
+      />
+      <Text fontSize={["2xl", "3xl"]}>Angelfiles</Text>
+      <Button
+        pos="fixed"
+        width={["30px", "50px"]}
+        height={["30px", "40px"]}
+        variant="ghost"
+        right="5%"
+        top="1.7%"
+        onClick={toggleColorMode}
+      >
+        <FontAwesomeIcon icon={colorMode === "light" ? faMoon : faSun} />
+      </Button>
+    </Box>
+  );
+}
