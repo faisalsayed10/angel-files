@@ -1,7 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { Link } from "react-router-dom";
-import { Alert, AlertIcon, Box, Button, Center, FormControl, Input, Text } from "@chakra-ui/react";
+import { Link, useHistory } from "react-router-dom";
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  Button,
+  Center,
+  FormControl,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 import CenterContainer from "../../util/CenterContainer";
 
 export default function ForgotPassword() {
@@ -10,6 +19,7 @@ export default function ForgotPassword() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -19,7 +29,10 @@ export default function ForgotPassword() {
       setError("");
       setLoading(true);
       await resetPassword(emailRef.current.value);
-      setMessage("Check your inbox for further instructions");
+      setMessage("Check your inbox! :)");
+      setTimeout(() => {
+        history.push("/login");
+      }, 3000);
     } catch {
       setError("Failed to reset password");
     }
@@ -30,7 +43,7 @@ export default function ForgotPassword() {
   return (
     <CenterContainer>
       <Box w="sm" h="20rem" px="8" py="8" borderWidth="2px" borderRadius="md">
-        <Text as="h2" fontSize="2xl" align="center" mb="16">
+        <Text as="h2" fontSize="2xl" align="center" mb="12">
           Password Reset
         </Text>
         {error && (
@@ -45,7 +58,7 @@ export default function ForgotPassword() {
             {message}
           </Alert>
         )}
-        <Box as="form" onSubmit={handleSubmit}>
+        <Box as="form" onSubmit={handleSubmit} my="3">
           <FormControl id="email">
             <Input
               variant="flushed"
@@ -70,7 +83,10 @@ export default function ForgotPassword() {
         </Box>
       </Box>
       <Box as="div" w="100" textAlign="center" mt="2">
-        Need an account? <Link to="/signup">Sign Up</Link>
+        Need an account?{" "}
+        <Link style={{ textDecoration: "underline" }} to="/signup">
+          Sign Up
+        </Link>
       </Box>
     </CenterContainer>
   );
