@@ -15,9 +15,10 @@ function AddFileButton({
   btnWidth,
   variant
 }) {
-  const fileInput = useRef(null);
+  const fileInput = useRef();
   const { currentUser } = useAuth();
   const toast = useToast();
+  const id = uuidV4();
 
   const handleUpload = (e) => {
     const file = e.target.files[0];
@@ -29,14 +30,13 @@ function AddFileButton({
         title: "Upload Error",
         description: "Sorry, max file size upload limit is 100mb.",
         status: "info",
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
       });
       return;
     }
 
     const nameArr = currentFolder.path.map((elem) => elem.name);
-    const id = uuidV4();
 
     setUploadingFiles((prevUploadingFiles) => [
       ...prevUploadingFiles,
@@ -119,10 +119,6 @@ function AddFileButton({
     );
   };
 
-  const handleClick = () => {
-    fileInput.current.click();
-  };
-
   return (
     <>
       <Input
@@ -130,10 +126,11 @@ function AddFileButton({
         ref={fileInput}
         hidden="hidden"
         onChange={handleUpload}
+        key={id}
       />
       <Button
         leftIcon={<FontAwesomeIcon icon={faFileUpload} />}
-        onClick={handleClick}
+        onClick={() => fileInput.current.click()}
         variant={variant}
         colorScheme="cyan"
         width={btnWidth}

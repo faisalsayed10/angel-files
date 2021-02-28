@@ -34,26 +34,36 @@ function File({ file }) {
     });
   };
 
-  const deleteFile = () => {
-    const fileRef = storage.ref(file.filePath);
-    fileRef
-      .delete()
-      .then(() => {
-        database.files.doc(file.id).delete();
-      })
-      .then(() =>
-        toast({
-          title: "Deleted",
-          description: "File deleted successfully!",
-          status: "info",
-          duration: 1000,
-          isClosable: true,
-        })
-      )
-      .catch((err) => {
-        console.error(err);
+  const deleteFile = async () => {
+    try {
+      const fileRef = await storage.ref().child(file.filePath);
+      await fileRef.delete();
+      await database.files.doc(file.id).delete();
+      toast({
+        title: "Deleted",
+        description: "File deleted successfully!",
+        status: "info",
+        duration: 1000,
+        isClosable: true,
       });
+    } catch (err) {
+      console.error(err);
+    }
   };
+
+  // function deleteFile() {
+  //   const storageRef = storage.ref();
+
+  //   var desertRef = storageRef.child("images/desert.jpg");
+  //   desertRef
+  //     .delete()
+  //     .then(() => {
+  //       // File deleted successfully
+  //     })
+  //     .catch((error) => {
+  //       // Uh-oh, an error occurred!
+  //     });
+  // }
 
   return (
     <Box as="tr">
