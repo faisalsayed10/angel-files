@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# Angelfiles
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="https://cloud-1y8rdm5s6-hack-club-bot.vercel.app/0angelfiles-big-logo.png" width="500px" style="display:block; margin:0 auto;" />
+*Quick and Secure cloud storage for Angels!*
 
-## Available Scripts
+## Inspiration
+Cloud Storage can be expensive. This inspired me to make my own cloud storage service.
 
-In the project directory, you can run:
+## What it does
+Angelfiles allows you to create folders and upload files which are kept highly secured in our database. I also implemented a highly reliable user authentication system which makes sure that your data is not stolen or leaked.
 
-### `yarn start`
+## How we built it
+I built it using 3 major technologies and a ton of small other technologies. I used React and Chakra UI for building the front-end of this project and I used Firebase for authentication and database! This project was built in just 18 hours!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Challenges we ran into
+Honestly, this was not at all a simple project, I had to solve numerous bugs while building it.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Accomplishments that we're proud of
+I'm happy that this project is actually fully complete with some complex functionalities such as authentication, file upload and security. Overall, I'm too proud of this project!
 
-### `yarn test`
+## What we learned
+Angelhacks was fun and I learned to manage my time very well (The entire project was built in 18 hours!) + I got to work with some awesome technologies!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## What's next for Angelfiles
+Currently, there are some limitations on the file size that we're uploading. My next goal is to remove all such limitations and also add more features in it.
 
-### `yarn build`
+## How to contribute?
+- First clone the repository
+- Setup a firebase project on your account (enable email-password authentication, cloud firestore, cloud storage)
+- Copy the firebase config and put it in your own .env file in a similar manner as shown below
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+// .env.example
+REACT_APP_FIREBASE_API_KEY=AIzaASxoxoxoxoxoxo
+REACT_APP_FIREBASE_AUTH_DOMAIN=hahahaha.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=hahahaha
+REACT_APP_FIREBASE_STORAGE_BUCKET=hahahaha.appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=694569420
+REACT_APP_FIREBASE_APP_ID=1:123456666:web:adwadafea
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+That's how you setup this project locally! Happy Hacking!
