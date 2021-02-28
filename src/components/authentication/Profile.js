@@ -61,6 +61,14 @@ export default function Profile() {
               colorScheme="cyan"
               variant="ghost"
               mt="4"
+              onClick={() => history.push('/')}
+            >
+              Home
+            </Button>
+            <Button
+              colorScheme="cyan"
+              variant="ghost"
+              mt="4"
               onClick={handleLogout}
             >
               Log Out
