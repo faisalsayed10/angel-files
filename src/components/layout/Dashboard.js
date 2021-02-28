@@ -9,6 +9,7 @@ import {
   MenuButton,
   MenuList,
   MenuDivider,
+  Skeleton,
 } from "@chakra-ui/react";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,19 +21,22 @@ import AddFolderButton from "../Buttons/AddFolderButton";
 import HomeButton from "../Buttons/HomeButton";
 import ProfileButton from "../Buttons/ProfileButton";
 import FilesEmptyState from "../files/FilesEmptyState";
-import Folder from "../../folders/Folder";
 import FolderBreadCrumbs from "./FolderBreadCrumbs";
 import FilesTable from "../files/FilesTable";
 import Navbar from "./Navbar";
 import FilesTableSkeleton from "../files/FilesTableSkeleton";
+import FolderGrid from "../folders/FolderGrid";
 
 function Dashboard() {
   const { folderId } = useParams();
   const { state = {} } = useLocation();
-  const { folder, childFolders, childFiles, loading } = useFolder(
-    folderId,
-    state.folder
-  );
+  const {
+    folder,
+    childFolders,
+    childFiles,
+    loading,
+    foldersLoading,
+  } = useFolder(folderId, state.folder);
   const [uploadingFiles, setUploadingFiles] = useState([]);
   const [progress, setProgress] = useState(0);
   const [isSmallerThan700] = useMediaQuery("(max-width: 700px)");
@@ -102,20 +106,22 @@ function Dashboard() {
         <FolderBreadCrumbs currentFolder={folder} />
         <hr style={{ marginBottom: "2rem" }} />
 
-        {/* FOLDERS */}
-
         <Box>
-          {childFolders.length > 0 && (
-            <Box as="div" display="flex" flexWrap="wrap">
-              {childFolders.map((childFolder) => (
-                <Box as="div" key={childFolder.id} w="200px" p="2">
-                  <Folder folder={childFolder} />
-                </Box>
-              ))}
-            </Box>
+          {/* FOLDERS */}
+
+          {foldersLoading && (
+            <>
+              <Skeleton h="140px" w="100%" />
+              <hr style={{ marginTop: "2rem", marginBottom: "2rem" }} />
+            </>
           )}
 
-          <hr style={{ marginTop: "2rem", marginBottom: "2rem" }} />
+          {childFolders.length > 0 && (
+            <>
+              <FolderGrid childFolders={childFolders} />
+              <hr style={{ marginTop: "2rem", marginBottom: "2rem" }} />
+            </>
+          )}
 
           {/* FILES */}
 
@@ -127,7 +133,6 @@ function Dashboard() {
               <FilesTableSkeleton />
             </>
           )}
-
           {!loading && childFiles.length === 0 && (
             <>
               <Text fontSize="3xl" fontWeight="600" mb={4}>
@@ -136,7 +141,6 @@ function Dashboard() {
               <FilesEmptyState />
             </>
           )}
-
           {childFiles.length > 0 && (
             <>
               <Text fontSize="3xl" fontWeight="600" mb={4}>

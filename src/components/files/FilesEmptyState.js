@@ -4,17 +4,20 @@ import { Flex, Text } from "@chakra-ui/react";
 const FilesEmptyState = () => (
   <Flex
     width="100%"
-    p={16}
+    p={["8", "16", "16"]}
     borderWidth="3px"
     borderRadius="xl"
     justify="center"
     direction="column"
     align="center"
+    textAlign="center"
   >
-    <Text fontSize="2xl" mb={6}>
+    <Text fontSize={["lg", "xl", "2xl"]} fontWeight="400" mb={8}>
       There aren't any files
     </Text>
-    <Text mb={6}>Start Uploading Files!</Text>
+    <Text fontSize={["sm", "sm", "md"]} fontWeight="400">
+      Start Uploading Files!
+    </Text>
   </Flex>
 );
 

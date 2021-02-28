@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -22,6 +22,7 @@ function AddFolderButton({ currentFolder, btnWidth, variant }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [name, setName] = useState("");
   const { currentUser } = useAuth();
+  const inputRef = useRef()
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -54,7 +55,7 @@ function AddFolderButton({ currentFolder, btnWidth, variant }) {
       >
         Create A Folder
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal initialFocusRef={inputRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Create A Folder</ModalHeader>
@@ -62,6 +63,7 @@ function AddFolderButton({ currentFolder, btnWidth, variant }) {
           <Box as="form" onSubmit={handleSubmit}>
             <ModalBody>
               <Input
+              ref={inputRef}
                 type="text"
                 required
                 placeholder="Folder Name"

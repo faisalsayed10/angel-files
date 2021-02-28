@@ -9,6 +9,8 @@ const ACTIONS = {
   SET_CHILD_FILES: "set-child-files",
   SET_LOADING: "set-loading",
   STOP_LOADING: "stop-loading",
+  FOLDERS_LOADING: "folders-loading",
+  STOP_FOLDERS_LOADING: "stop-folders-loading",
 };
 
 export const ROOT_FOLDER = { name: "Root", id: null, path: [] };
@@ -47,6 +49,18 @@ const reducer = (state, action) => {
         ...state,
         loading: false,
       };
+    case ACTIONS.FOLDERS_LOADING:
+      console.log("loading");
+      return {
+        ...state,
+        foldersLoading: true,
+      };
+    case ACTIONS.STOP_FOLDERS_LOADING:
+      console.log("stopped loading");
+      return {
+        ...state,
+        foldersLoading: false,
+      };
     default:
       return state;
   }
@@ -60,6 +74,7 @@ export function useFolder(folderId = null, folder = null) {
     childFolders: [],
     childFiles: [],
     loading: false,
+    foldersLoading: false,
   });
 
   useEffect(() => {
@@ -73,7 +88,7 @@ export function useFolder(folderId = null, folder = null) {
         payload: { folder: ROOT_FOLDER },
       });
     }
-
+    dispatch({ type: ACTIONS.FOLDERS_LOADING });
     database.folders
       .doc(folderId)
       .get()
@@ -82,16 +97,19 @@ export function useFolder(folderId = null, folder = null) {
           type: ACTIONS.UPDATE_FOLDER,
           payload: { folder: database.formatDoc(doc) },
         });
+        dispatch({ type: ACTIONS.STOP_FOLDERS_LOADING });
       })
       .catch(() => {
         dispatch({
           type: ACTIONS.UPDATE_FOLDER,
           payload: { folder: ROOT_FOLDER },
         });
+        dispatch({ type: ACTIONS.STOP_FOLDERS_LOADING });
       });
   }, [folderId]);
 
   useEffect(() => {
+    dispatch({ type: ACTIONS.FOLDERS_LOADING });
     return database.folders
       .where("parentId", "==", folderId)
       .where("userId", "==", currentUser.uid)
@@ -101,9 +119,11 @@ export function useFolder(folderId = null, folder = null) {
           type: ACTIONS.SET_CHILD_FOLDERS,
           payload: { childFolders: snapshot.docs.map(database.formatDoc) },
         });
+        dispatch({ type: ACTIONS.STOP_FOLDERS_LOADING });
       });
   }, [folderId, currentUser]);
 
+  // files
   useEffect(() => {
     dispatch({ type: ACTIONS.SET_LOADING });
     return database.files

@@ -19,12 +19,12 @@ export default function Navbar() {
       />
       <Text fontSize={["2xl", "3xl"]}>Angelfiles</Text>
       <Button
-        pos="fixed"
+        pos="absolute"
         width={["30px", "50px"]}
         height={["30px", "40px"]}
         variant="ghost"
         right="5%"
-        top="1.7%"
+        top="14px"
         onClick={toggleColorMode}
       >
         <FontAwesomeIcon icon={colorMode === "light" ? faMoon : faSun} />
