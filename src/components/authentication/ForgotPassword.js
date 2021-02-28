@@ -33,8 +33,8 @@ export default function ForgotPassword() {
       setTimeout(() => {
         history.push("/login");
       }, 3000);
-    } catch {
-      setError("Failed to reset password");
+    } catch (err) {
+      setError(err.message);
     }
 
     setLoading(false);

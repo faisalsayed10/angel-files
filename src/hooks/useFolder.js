@@ -50,13 +50,11 @@ const reducer = (state, action) => {
         loading: false,
       };
     case ACTIONS.FOLDERS_LOADING:
-      console.log("loading");
       return {
         ...state,
         foldersLoading: true,
       };
     case ACTIONS.STOP_FOLDERS_LOADING:
-      console.log("stopped loading");
       return {
         ...state,
         foldersLoading: false,
