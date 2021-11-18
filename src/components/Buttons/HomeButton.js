@@ -1,8 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { Button } from '@chakra-ui/react';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@chakra-ui/react";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function HomeButton({ variant }) {
   return (
@@ -19,4 +19,4 @@ function HomeButton({ variant }) {
   );
 }
 
-export default HomeButton
+export default HomeButton;

@@ -22,15 +22,15 @@ function AddFolderButton({ currentFolder, btnWidth, variant }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [name, setName] = useState("");
   const { currentUser } = useAuth();
-  const inputRef = useRef()
+  const inputRef = useRef();
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (currentFolder === null) return;
-    const path = [...currentFolder.path]
+    const path = [...currentFolder.path];
     if (currentFolder !== ROOT_FOLDER) {
-      path.push({ name: currentFolder.name, id: currentFolder.id })
+      path.push({ name: currentFolder.name, id: currentFolder.id });
     }
 
     database.folders.add({
@@ -63,7 +63,7 @@ function AddFolderButton({ currentFolder, btnWidth, variant }) {
           <Box as="form" onSubmit={handleSubmit}>
             <ModalBody>
               <Input
-              ref={inputRef}
+                ref={inputRef}
                 type="text"
                 required
                 placeholder="Folder Name"

@@ -10,6 +10,7 @@ import {
   MenuList,
   MenuDivider,
   Skeleton,
+  Link,
 } from "@chakra-ui/react";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -30,13 +31,8 @@ import FolderGrid from "../folders/FolderGrid";
 function Dashboard() {
   const { folderId } = useParams();
   const { state = {} } = useLocation();
-  const {
-    folder,
-    childFolders,
-    childFiles,
-    loading,
-    foldersLoading,
-  } = useFolder(folderId, state.folder);
+  const { folder, childFolders, childFiles, loading, foldersLoading } =
+    useFolder(folderId, state.folder);
   const [uploadingFiles, setUploadingFiles] = useState([]);
   const [progress, setProgress] = useState(0);
   const [isSmallerThan700] = useMediaQuery("(max-width: 700px)");
@@ -150,6 +146,16 @@ function Dashboard() {
             </>
           )}
         </Box>
+        <Text align="center" mt="4">
+          Made with ♥ by Faisal |{" "}
+          <Link
+            href="https://github.com/faisalsayed10/angel-files"
+            textDecor="underline"
+            target="_blank"
+          >
+            Open Source
+          </Link>
+        </Text>
       </Box>
 
       {/* PROGRESS BAR */}

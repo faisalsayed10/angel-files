@@ -13,7 +13,7 @@ function AddFileButton({
   setProgress,
   progress,
   btnWidth,
-  variant
+  variant,
 }) {
   const fileInput = useRef();
   const { currentUser } = useAuth();
@@ -103,7 +103,7 @@ function AddFileButton({
                   folderId: currentFolder.id,
                   userId: currentUser.uid,
                   size: file.size,
-                  filePath: `/files/${currentUser.uid}/${filePath}`
+                  filePath: `/files/${currentUser.uid}/${filePath}`,
                 });
               }
             });
